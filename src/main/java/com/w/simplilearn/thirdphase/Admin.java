@@ -16,5 +16,8 @@ public class Admin {
 		this.password = password;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Admin [userName=" + userName + ", password=" + password + "]";
+	}
 }
