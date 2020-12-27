@@ -2,32 +2,29 @@ package com.w.simplilearn.thirdphase;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Shoes {
 	int product_id;
 	 LocalDate date;
 	 int sesproduct_id;
-	
-
-	
-
+	 @DateTimeFormat(pattern = "dd/MM/yyyy")
+	String daten;
 
 
+	public String getDaten() {
+		return daten;
+	}
 
-//	public String[] getUpcolor() {
-//		return upcolor;
-//	}
-//
-//
-//
-//
-//
-//	public void setUpcolor(String[] upcolor) {
-//		this.upcolor = upcolor;
-//	}
+
+
+
+
+	public void setDaten(String daten) {
+		this.daten = daten;
+	}
 
 
 
@@ -112,7 +109,7 @@ public class Shoes {
 	public String toString() {
 		return "Shoes [product_id=" + product_id + ", date=" + date + ", sesproduct_id="
 				+ sesproduct_id + ", brandName=" + brandName + ", size=" + size + ", color=" + color
-				+ ", type=" + type + ", price=" + price + "]";
+				+ ", type=" + type + ", price=" + price + ", daten=" + daten + "]";
 	}
 
 
@@ -120,7 +117,7 @@ public class Shoes {
 
 
 	public Shoes(int product_id, LocalDate date, int sesproduct_id, String brandName, String size, String color,
-			String type, BigDecimal price) {
+			String type, BigDecimal price,String daten) {
 		super();
 		this.product_id = product_id;
 		this.date = date;
@@ -130,6 +127,7 @@ public class Shoes {
 		this.color = color;
 		this.type = type;
 		this.price = price;
+		this.daten = daten;
 	}
 
 

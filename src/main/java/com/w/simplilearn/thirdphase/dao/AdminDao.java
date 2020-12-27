@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.w.simplilearn.thirdphase.Admin;
 import com.w.simplilearn.thirdphase.Shoes;
+import com.w.simplilearn.thirdphase.User;
 
 @Repository
 public class AdminDao  {
@@ -91,40 +92,55 @@ public class AdminDao  {
 	}
 
 	public int updatePurchase(String username, String address, String emailid, String phoneno, String color, String brandname, String type,String size,LocalDate date,BigDecimal price) {
-		String qry = "insert into purchase_history(username,address,email,phone_no,product_type,product_size,product_color,brand,date)values('"+username+"','"+address+"','"+emailid+"','"+phoneno+"','"+type+"','"+size+"','"+color+"','"+brandname+"','"+date+"')";
+		String qry = "insert into purchase_history(username,address,email,phone_no,product_type,product_size,product_color,brand,date,price)values('"+username+"','"+address+"','"+emailid+"','"+phoneno+"','"+type+"','"+size+"','"+color+"','"+brandname+"','"+date+"','"+price+"')";
 		 
 		 return jdbcTemplate.update(qry);
 	}
 
 
 
+	public int updateup(String userName, String password) {
+		String qry = "update admin set admin_id = ?,password = ? ";
+		return jdbcTemplate.update(qry,userName,password);
+	}
+
+	public List<Shoes> fetchDateHistory(String daten) {
+		String qry = "select product_type,product_size,product_color,brand,price from purchase_history where date =?";
+		@SuppressWarnings("deprecation")
+		List<Shoes>shoe =jdbcTemplate.query(qry,new Object[] {daten},new RowMapper<Shoes>() {
+			public Shoes mapRow(ResultSet rs, int rowNum) throws SQLException{
+				Shoes c = new Shoes();
+				c.setBrandName(rs.getString("brand"));
+				c.setSize(rs.getString("product_size"));
+	            c.setColor(rs.getString("product_color"));
+	            c.setType(rs.getString("product_type"));
+	            c.setPrice(rs.getBigDecimal("price"));
+	            return c;
+			}
+		});
+		System.out.println(shoe);
+	return shoe;
 	
-		
-		 
-//	        return (Shoes) queryForObject(qry, new Object[] { search_key },
-//	             new RowMapper<Shoes>() {
-//	                 @Override
-//	                 public Shoes mapRow(ResultSet rs, int rowNumber) {
-//	                	 Shoes shoe = new Shoes();
-//	                     try {
-//							shoe.setBrandName(rs.getString("brandname"));
-//						
-//	                     shoe.setSize(rs.getString("size"));
-//	                     shoe.setColor(rs.getString("color"));
-//	                     // set other properties
-//	                     } catch (SQLException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//	                     return shoe;
-//	                 }
-//
-//					
-//	             });
-		
-	
-	
-	
+	}
+
+
+
+	public List<User> fetchDateHistory2(String daten) {
+		String qry = "select username, address,email , phone_no from purchase_history where date = ?";
+		@SuppressWarnings("deprecation")
+		List<User>user =jdbcTemplate.query(qry,new Object[] {daten},new RowMapper<User>() {
+			public User mapRow(ResultSet rs, int rowNum) throws SQLException{
+				User c = new User();
+				c.setUsername(rs.getString("username"));
+				c.setAddress(rs.getString("address"));
+	            c.setEmailid(rs.getString("email"));
+	            c.setPhoneno(rs.getString("phone_no"));
+	            return c;
+			}
+		});
+	return user;
+	}
+
 
 	
 }

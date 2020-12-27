@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>purchase history</title>
 <style>
 img {
   display: block;
@@ -27,26 +27,20 @@ div {
 </style>
 </head>
 <body>
- <form action = "/userregistration" method = "post">
-Welcome to payment page You can pay here
-<br>
-<br>
-you have selected the following shoe
-<br>
-<br>
 <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Product-id</th>
+                        
                         <th>Brand-Name</th>
                         <th>Color</th>
                         <th>Size</th>
                         <th>Price</th>
+                         
                         
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="shoe" items="${shoes}">
+                    <c:forEach var="shoe" items="${updalist}">
                         <tr>
                         	
                             <td>${shoe.brandName} </td>
@@ -58,26 +52,40 @@ you have selected the following shoe
                     </c:forEach>
                     
                 </tbody>
-            </table>
-            <div></div>
-           please enter your details for paying
-           <div></div>
-           Name as in your card&nbsp;<input type = "text" name = "name" required><br>
-<br>
-Bank name&nbsp;<input type = "text" name = "Bankname" required><br>
-<br>
-Account no&nbsp;<input type = "text" name = "accnum" required><br>
-<br>
-card number<input type = "text" name = "cardnum" required><br>
-<br>
-cvv &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" name = "cvv" required>
-<br>
-<br>
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href = "/paymentsubmit"> click on this link to pay</a>
-Copyright &copy; 2020 Sporty Shoes
-            </form>
-             
+            </table> 
            
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th>user-name</th>
+                        <th>email-id</th>
+                        <th>address</th>
+                        <th>phone</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="user" items="${updalistuser}">
+                        <tr>
+                        	
+                            <td>${user.username} </td>
+                            <td>${user.address}</td>
+                            <td>${user.emailid}</td>
+                            <td>${user.phoneno}</td>
+                            
+                        </tr>
+                    </c:forEach>
+                    
+                </tbody>
+            </table> 
+            <div></div>
+            <a href = "/log">click on this link to go back to welcome page</a>
+            <div></div>
+            <div></div>
+            <div></div>
+           
+            Copyright &copy; 2020 Sporty Shoes
 </body>
+
 </html>

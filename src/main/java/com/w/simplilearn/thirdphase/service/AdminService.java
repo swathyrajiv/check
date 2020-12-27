@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.w.simplilearn.thirdphase.Admin;
 import com.w.simplilearn.thirdphase.Shoes;
+import com.w.simplilearn.thirdphase.User;
 import com.w.simplilearn.thirdphase.dao.AdminDao;
 
 
@@ -42,6 +43,21 @@ public class AdminService {
 			String brandname, String type,String size,LocalDate date,BigDecimal price) {
 		
 		return dao.updatePurchase(username,address,emailid,phoneno,color,brandname,type,size,date,price);
+	}
+
+	public int updateup(String userName, String password) {
+		// TODO Auto-generated method stub
+		return dao.updateup(userName,password);
+	}
+
+	public List<Shoes>fetchDateHistory(String daten) {
+		
+		return dao.fetchDateHistory(daten);
+	}
+
+	public List<User> fetchDateHistory2(String daten) {
+		// TODO Auto-generated method stub
+		return dao.fetchDateHistory2(daten);
 	}
 
 }

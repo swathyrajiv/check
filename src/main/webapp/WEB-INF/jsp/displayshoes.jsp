@@ -8,6 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style >
+div {
+  border: white;
+  background-color: white;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+</style>
 </head>
 <body>
  <form action = "/saveshoes" method = "post" >
@@ -25,7 +35,7 @@
                 <tbody>
                     <c:forEach var="shoe" items="${shoes}">
                         <tr>
-                        	<td><input type = "radio" name = "sesproduct_id" value = "${shoe.product_id}" id = "${shoe.product_id}">${shoe.product_id}</td>
+                        	<td><input type = "radio" name = "sesproduct_id" value = "${shoe.product_id}" id = "${shoe.product_id}"required>${shoe.product_id} </td>
                             <td>${shoe.brandName} </td>
                             <td>${shoe.color}</td>
                             <td>${shoe.size}</td>
@@ -37,6 +47,8 @@
                 </tbody>
             </table> 
             <input type ="submit" name = "btnappr" value = "click on this for payment">
-            </form>    
+            </form>  
+            <div></div> 
+             Copyright &copy; 2020 Sporty Shoes  
 </body>
 </html>
