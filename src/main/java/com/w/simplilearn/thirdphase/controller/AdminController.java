@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.w.simplilearn.thirdphase.Admin;
-import com.w.simplilearn.thirdphase.Shoes;
+import com.w.simplilearn.thirdphase.Cuizine;
 import com.w.simplilearn.thirdphase.User;
 import com.w.simplilearn.thirdphase.service.AdminService;
 @RestController
@@ -24,7 +24,10 @@ public class AdminController {
 	String username;
 	String password;
 	String daten;
+	String editCuizine;
 	static String name;
+	int updateCuizId,delCuizineId;
+	static String success ="updated the data successfully";
 	@RequestMapping (value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout() {
 	    ModelAndView modelAndView = new ModelAndView();
@@ -61,6 +64,7 @@ public class AdminController {
 		
 			return service.updateCredentials();
 		}
+	
 	@RequestMapping (value = "/log", method = RequestMethod.GET)
 	public ModelAndView welcome(Admin admin) {
 	    ModelAndView modelAndView = new ModelAndView();
@@ -69,30 +73,31 @@ public class AdminController {
 	    return modelAndView;
 	}
 		
-	@RequestMapping(value ="/addshoesview", method = RequestMethod.GET)
+	@RequestMapping(value ="/addCuizine", method = RequestMethod.GET)
 	public ModelAndView addshoesview() {
 	ModelAndView modelAndView = new ModelAndView();
-	 modelAndView.setViewName("addshoes");
+	 modelAndView.setViewName("addCuizine");
 	 return modelAndView;
 	}
-	@RequestMapping(value ="/addshoes", method = RequestMethod.POST)
-	public ModelAndView addShoes(Shoes shoe) {
+	@RequestMapping(value ="/addcuizineview", method = RequestMethod.POST)
+	public ModelAndView addCuizine(Cuizine cuizine) {
 		int value ;
-		String brandName = null;
-		String size = null;
-		String color = null;
-		String type = null;
+		String cuizineName = null;
+		String cuizineType = null;
+		String vegornonveg = null;
+		String vegan = null;
 		BigDecimal price;
-		brandName = shoe.getBrandName();
-		size = shoe.getSize();
-		color = shoe.getColor();
-		type = shoe.getType();
-		price = shoe.getPrice();
-		value = updateShoes(brandName, size, color, type,price);
+		cuizineName = cuizine.getCuizineName();
+		cuizineType = cuizine.getCuizineType();
+		vegornonveg = cuizine.getVegornonveg();
+		vegan = cuizine.getVegan();
+		price = cuizine.getPrice();
+		value = updateCuizine(cuizineName,cuizineType,vegornonveg,vegan,price);
 		if(value ==1) {
 		System.out.println(value);
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("addshoes");
+		modelAndView.addObject("success",success);
+		modelAndView.setViewName("addCuizine");
 		return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView();
@@ -101,8 +106,104 @@ public class AdminController {
 		}
 		
 	}
-	int updateShoes(String brandName,String size,String color, String type,BigDecimal price) {
-		return service.updateShoes(brandName,size,color,type,price);
+	int updateCuizine(String cuizineName,String cuizineType,String vegornonveg, String vegan,BigDecimal price) {
+		return service.updateCuizine(cuizineName,cuizineType,vegornonveg,vegan,price);
+	}
+	@RequestMapping(value ="/editCuizineD")
+	public ModelAndView editCuizine() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("editCuizine");
+		return modelAndView;
+	}
+	@RequestMapping(value ="/editCuizineDetailsMap",method = RequestMethod.POST)
+	public ModelAndView editCuizine(Cuizine cuizine) {
+		List<Cuizine>fetchCuizineList = new ArrayList<>();
+		editCuizine = cuizine.getEditCuizine();
+		System.out.println(editCuizine+"nn");
+		fetchCuizineList = fetchCuizineDetails(editCuizine);
+		System.out.println("list"+fetchCuizineList);
+		if(fetchCuizineList.isEmpty()) {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("invalid");
+			return modelAndView;
+		}else {
+			System.out.println(fetchCuizineList);
+			ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("editCuizineDetails");
+			modelAndView.addObject("fetchCuizineList", fetchCuizineList);
+			return modelAndView;
+		}
+		
+		
+	}
+	public List<Cuizine> fetchCuizineDetails(String editCuizine){
+		
+		return service.fetchCuizineDetails(editCuizine);
+	}
+	@RequestMapping(value="/editCuiz",method = RequestMethod.POST)
+	public ModelAndView editCuizineDetailsMapadd(Cuizine cuizine) {
+		ModelAndView modelAndView = new ModelAndView();
+		updateCuizId = cuizine.getProduct_id();
+		modelAndView.addObject("updateCuizId", updateCuizId);
+		System.out.println(updateCuizId+"pp");
+		modelAndView.setViewName("editCuizineAdd");
+		return modelAndView;
+	}
+	@RequestMapping(value="/editCuizineAdd",method = RequestMethod.POST)
+	public ModelAndView editCuizineAddDb(Cuizine cuizine) {
+		
+		updateCuizId = cuizine.getProduct_id();
+		String cuizineName = null;
+		String cuizineType = null;
+		String vegornonveg = null;
+		String vegan = null;
+		BigDecimal price;
+		cuizineName = cuizine.getCuizineName();
+		cuizineType = cuizine.getCuizineType();
+		vegornonveg = cuizine.getVegornonveg();
+		vegan = cuizine.getVegan();
+		price = cuizine.getPrice();
+		System.out.println(updateCuizId+"ii");
+		System.out.println(cuizineName+"name");
+		System.out.println(cuizineType+"ty");
+		int ret = updateCuizineFn(cuizineName,cuizineType,vegornonveg,vegan,price,updateCuizId);
+		System.out.println(ret+"ret");
+		if(ret == 1) {
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("editCuizine");
+			modelAndView.addObject("success",success);
+			return modelAndView;
+		}else {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("invalid");
+			return modelAndView;
+		}
+		
+		
+	}
+	public int updateCuizineFn(String cuizineName,String cuizineType,String vegornonveg,String vegan,BigDecimal price,int updateCuizId) {
+		
+		return service.updateCuizineFn(cuizineName,cuizineType,vegornonveg,vegan,price,updateCuizId);
+	}
+	
+	
+	@RequestMapping(value ="/editCuizineDel", method = RequestMethod.POST)
+	public ModelAndView delCuizine(Cuizine cuizine) {
+		ModelAndView modelAndView = new ModelAndView();
+		delCuizineId =cuizine.getProduct_id();
+		System.out.println("delid"+delCuizineId);
+		int ret = delCuizine(delCuizineId);
+		System.out.println(ret+"retv");
+		modelAndView.addObject("success",success);
+		modelAndView.setViewName("delCuizne");
+		return modelAndView;
+		
+	}
+		
+public int delCuizine(int delCuizineId) {
+		
+		return service.delCuizine(delCuizineId);
 	}
 	@RequestMapping(value ="/changepassword", method = RequestMethod.GET)
 	public ModelAndView changePassword() {
@@ -143,34 +244,34 @@ if(ret==1) {
 		return modelAndView;
 		
 	}
-	@RequestMapping(value = "/viewhistory", method = RequestMethod.POST)
-		public ModelAndView viewHistory(User user, Shoes shoe) {
-		List<Shoes>updaList = new ArrayList<>();
-		List<User>updaListUser = new ArrayList<>();
-		daten = shoe.getDaten();
-		updaList =fetchDateHistory(daten);
-		updaListUser = fetchDateHistory2(daten);
-		if(updaList.isEmpty()) {
-			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("invalid");
-			return modelAndView;
-		}else {
-		System.out.println(updaList);
-			System.out.println(daten);
-			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("viewhistorypage");
-			modelAndView.addObject("updalist", updaList);
-			modelAndView.addObject("updalistuser",updaListUser);
-			return modelAndView;
-		}
-	}
-	public List<User> fetchDateHistory2(String daten) {
-		return service.fetchDateHistory2(daten);
-	}
-
-	public List<Shoes> fetchDateHistory(String daten) {
-		return service.fetchDateHistory(daten);
-		
-	}
+//	@RequestMapping(value = "/viewhistory", method = RequestMethod.POST)
+//		public ModelAndView viewHistory(User user, Cuizine cuizine) {
+//		List<Cuizine>updaList = new ArrayList<>();
+//		List<User>updaListUser = new ArrayList<>();
+//		daten = cuizine.getDaten();
+//		updaList =fetchDateHistory(daten);
+//		updaListUser = fetchDateHistory2(daten);
+//		if(updaList.isEmpty()) {
+//			ModelAndView modelAndView = new ModelAndView();
+//			modelAndView.setViewName("invalid");
+//			return modelAndView;
+//		}else {
+//		System.out.println(updaList);
+//			System.out.println(daten);
+//			ModelAndView modelAndView = new ModelAndView();
+//			modelAndView.setViewName("viewhistorypage");
+//			modelAndView.addObject("updalist", updaList);
+//			modelAndView.addObject("updalistuser",updaListUser);
+//			return modelAndView;
+//		}
+//	}
+//	public List<User> fetchDateHistory2(String daten) {
+//		return service.fetchDateHistory2(daten);
+//	}
+//
+//	public List<Cuizine> fetchDateHistory(String daten) {
+//		return service.fetchDateHistory(daten);
+//		
+//	}
 	
 }

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>add shoes</title>
 <style>
-img {
+.img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -24,15 +24,16 @@ div {
 </style>
 </head>
 <body>
-<form action="/addshoes" method="post">
-<h2>Add details of shoes here</h2>
-enter brand name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type  = "text" name = "brandName" required><br>
+
+<form action="/addcuizineview" method="post">
+<span>${success}</span>
+enter cuizine name:<input type  = "text" name = "cuizineName" required><br>
 <br>
-enter type&nbsp; <input type  = "text" name = "type" required><br>
+enter cuizine type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type  = "text" name = "cuizineType" required><br>
 <br>
-enter color&nbsp;<input type  = "text" name = "color" required><br> 
+enter veg/nonveg&nbsp; <input type  = "text" name = "vegornonveg" required><br>
 <br>
-enter size &nbsp;<input type = "text" name = "size" required><br>
+enter vegan or non vegan&nbsp;<input type  = "text" name = "vegan" required><br> 
 <br>
 enter price &nbsp;<input type = "text" name = "price" required><br>
 <br>
@@ -42,6 +43,7 @@ enter price &nbsp;<input type = "text" name = "price" required><br>
 <a href = "/log">click here to go back to welcome page</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href = "/logout">log out</a>
  </form> 
+ 
  <div>
  </div>
  <div>

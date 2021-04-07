@@ -35,6 +35,7 @@ Email<input type = "text" pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" nam
 <br>
 phone#<input type = "text" pattern= "[789][0-9]{9}" name = "phoneno" required><br>
 <br>
+password<input type = "password" name = password required><br>
 <input type="submit" name= "submit" value = "click here to register">
 <br>
 <div></div>

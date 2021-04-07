@@ -14,7 +14,7 @@
 <br>
 <h2>we know your taste</h2>
 <br>
-enter the type you want to search<input type = "text" name = "type" required >
+enter the type you want to search<input type = "text" name = "cuizineName" required >
 <br>
 <br>
 <br>

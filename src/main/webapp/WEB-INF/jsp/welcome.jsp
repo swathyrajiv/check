@@ -23,7 +23,8 @@ h2{
 <body>
 <img src="/images/welcom.png" height="500" width="700">
 <h1>Welcome to <%= request.getAttribute("name")%> </h1> 
-<a href = "/addshoesview"> add product details</a>&nbsp;&nbsp;&nbsp;
+<a href = "/addCuizine"> add cuizine details</a>&nbsp;&nbsp;&nbsp;
+<a href ="/editCuizineD">edit cuizine</a>
 <a href = "/viewpurchasehistory">view purchase history</a>&nbsp;&nbsp;
 <a href = "/changepassword">Change password</a>&nbsp;&nbsp;
 <a href = "/logout">log out</a>

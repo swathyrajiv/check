@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>payment</title>
 <style>
 img {
   display: block;
@@ -27,39 +27,12 @@ div {
 </style>
 </head>
 <body>
- <form action = "/userregistration" method = "post">
+ 
 Welcome to payment page You can pay here
 <br>
+
 <br>
-you have selected the following shoe
-<br>
-<br>
-<table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Product-id</th>
-                        <th>Brand-Name</th>
-                        <th>Color</th>
-                        <th>Size</th>
-                        <th>Price</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="shoe" items="${shoes}">
-                        <tr>
-                        	
-                            <td>${shoe.brandName} </td>
-                            <td>${shoe.color}</td>
-                            <td>${shoe.size}</td>
-                            <td>${shoe.price}</td>
-                            
-                        </tr>
-                    </c:forEach>
-                    
-                </tbody>
-            </table>
-            <div></div>
+
            please enter your details for paying
            <div></div>
            Name as in your card&nbsp;<input type = "text" name = "name" required><br>
@@ -76,7 +49,7 @@ cvv &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" n
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href = "/paymentsubmit"> click on this link to pay</a>
 Copyright &copy; 2020 Sporty Shoes
-            </form>
+            
              
            
 </body>
